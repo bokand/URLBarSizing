@@ -9,6 +9,8 @@ proposal.
 Note: These URL bar issues are inherent only to mobile platforms so all the above discussion implicitly
 applies only to the mobile versions of each browser.
 
+Caveat: I have not had the chance to try out Edge browser on mobile so it's not included below.
+
 ## Differences between browsers
 
 #### Resize Event
