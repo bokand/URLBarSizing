@@ -116,3 +116,15 @@ or shown.
 It will be a little more work to make non-fixed elements fill the viewport after scrolling. I believe in most cases you'd want
 this for position:fixed elements anyway. In the cases that remain, we can get back to todays behavior by explicitly sizing the
 root element to window.innerHeight in the resize handler.
+
+In general, the fixed-position viewport size can be read from window.innerHeight and the ICB size can be read from
+documentElement.clientHeight.
+
+## Demo
+
+You can try out the proposed changes in a custom [build of Chromium](https://github.com/bokand/URLBarSizing/blob/master/ChromePublic.apk)
+provided in this repo. I've provided a [test page](http://bokand.github.io/demo/urlbarsize.html) that attempts to demonstrate
+all the points talked about here. The four bars on the right of the page are all possible combinations of 99%, 99vh,
+position:fixed and position:absolute provided on a scrollable page. Hiding the URL bar shows how it affects each. Resize events
+are printed down the page.
+
