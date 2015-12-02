@@ -91,3 +91,28 @@ How does each browser treat the URL bar with regard to innerHeight?
   largest possible viewable area (i.e. with the URL bar hidden).
   + *IE* - Since the URL bar doesn't hide window.innerHeight doesn't change. It does not include the top controls while
   outerWidth does.
+
+## Proposed Changes to Chrome
+
+Clearly this is an interop disaster. I propose we make some small changes to Chrome to help the situation:
+
+  1. Don't resize the ICB due to the URL bar. This is painful for users since the page get a relayout each time the user
+     changes the scroll direction. It's painful for developers because that's not how any of the other mobile browsers
+     work. For compatibilities sake, lets make the ICB sized statically to the *smallest possible viewable area*.
+  2. Make vh units relative to a static containing block. This means an author's 'vh' sized fonts wont change size each
+     time the user scrolls in a new direction. It might be conceptually nice to make this relative to the proposed-static
+     ICB (i.e. the smallest possible viewable area) but Safari already uses the opposite. Web authors' lives are difficult
+     enought; in the name of compatibility, I propose we do the same thing as Safari and make vh units relative to the
+     *largest possible viewable area*.
+
+Some notes:
+
+#1 means that, when the top controls are showing, percentage-based heights will differ on elements based on whether they
+are position:fixed or not. position:fixed elements with percentage based heights will resize when the top controls are hidden
+or shown.
+
+#2 means that vh units will not resize as a result of top controls, regardless of what their position: property is.
+
+It will be a little more work to make non-fixed elements fill the viewport after scrolling. I believe in most cases you'd want
+this for position:fixed elements anyway. In the cases that remain, we can get back to todays behavior by explicitly sizing the
+root element to window.innerHeight in the resize handler.
