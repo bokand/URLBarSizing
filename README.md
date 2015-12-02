@@ -1,9 +1,10 @@
 # URLBarSizing
 The mobile browser URL bar is such a pain! It interacts with the page in a different way in every browser.
-This page hopes to explain the nuances in how the URL bar affects the web page, document the differences
-between the browsers, and explain some proposed changes to how Chrome behaves.
+This page hopes to explain the nuances of how the URL bar affects the web page, document the differences
+between the browsers, and explain some proposed changes to Chrome to improve the current situation.
 
-I've also provided a demo page and custom Chrome build to demonstrate the proposal.
+I've also provided a [demo page](http://bokand.github.io/demo/urlbarsize.html) and [custom Chrome build](https://github.com/bokand/URLBarSizing/blob/master/ChromePublic.apk) for Android to demonstrate the
+proposal.
 
 Note: These URL bar issues are inherent only to mobile platforms so all the above discussion implicitly
 applies only to the mobile versions of each browser.
