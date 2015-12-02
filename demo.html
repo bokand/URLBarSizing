@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <style>
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      height: 2000px;
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    div.bar {
+      width: 20px;
+      top: 0px;
+    }
+
+    .fixedpercent {
+      position: fixed;
+      height: 99%;
+      background-color: lightsteelblue;
+    }
+
+    .fixedvh {
+      position: fixed;
+      height: 99vh;
+      background-color: lightskyblue;
+    }
+
+    .abspercent {
+      position: absolute;
+      height: 99%;
+      background-color: darksalmon;
+    }
+
+    .absvh {
+      position:absolute;
+      height: 99vh;
+      background-color: coral;
+    }
+
+    .textfixed {
+      width: 600px;
+      height: 20px;
+      padding: 0px 20px;
+      transform: rotate(90deg);
+      transform-origin: left bottom 0;
+    }
+
+    .textabs {
+      width: 600px;
+      height: 20px;
+      padding: 0px 120px;
+      transform: rotate(90deg);
+      transform-origin: left bottom 0;
+    }
+
+    #console {
+      position: absolute;
+      left: 0px;
+      right: 100px;
+    }
+  </style>
+  <script>
+    function resized() {
+      var console = document.getElementById('console');
+      console.innerHTML += "*Resize! window.innerHeight: " + window.innerHeight + ",  documentElement.clientHeight: " + document.documentElement.clientHeight + "<br>";
+    }
+  </script>
+</head>
+
+<body onresize="resized()">
+
+<div style="right: 0px" class="bar fixedpercent"><div class="textfixed">percentage-based position:fixed</div></div>
+<div style="right: 25px" class="bar fixedvh"><div class="textfixed">viewport-unit position:fixed</div></div>
+<div style="right: 50px" class="bar abspercent"><div class="textabs">percentage-based position:absolute</div></div>
+<div style="right: 75px" class="bar absvh"><div class="textabs">viewport-unit position:absolute</div></div>
+<div id="console">
+  OnResize handler calls will be displayed below with window.innerWidth and window.innerHeight<br><br>
+</div>
+</body>
+</html>
