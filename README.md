@@ -8,7 +8,7 @@ applies only to the mobile versions of each browser.
 
 ## Differences between browsers
 
-### Resize Event
+#### Resize Event
 
 Browsers will fire a resize event on the window when it changes dimensions. On desktops, this would happen
 when the user resizes the browser window. On mobile, this can happen when the URL bar is shown/hidden or 
@@ -23,7 +23,7 @@ So in terms of the URL bar hiding/showing, when is a resize event fired?
   + *Firefox* - Firefox does not send a resize event at all in response to the URL bar.
   + *IE* - The URL bar doesn't move, simple enough.
 
-### Initial Containing Block size
+#### Initial Containing Block size
 
 Simply speaking, the *Initial Containing Block* (I'll use ICB for short) is the root block used for sizing
 non-position:fixed elements on the page. That is, if an element specifies a percentage based size, it must use the
@@ -42,7 +42,7 @@ So, how does the URL bar affect the ICB in each browser?
   i.e. the viewable area when the URL bar is fully hidden.
   + *IE* - Since the URL bar doesn't hide, it uses a static ICB which is the size of the viewable area.
   
-### position:fixed size
+#### position:fixed size
 
 According to the spec, the containing block for position: fixed elements is the viewport. That is, the percentage based
 sizes are based on the viewport's size. As discussed above, this can be somewhat ambiguous.
@@ -62,7 +62,7 @@ the sizes recalculated?
   + *Firefox* - When top controls hit their extent (i.e. are maximally shown/hidden).
   + *IE* - N/A
   
-### Viewport-units (vh/vw)
+#### Viewport-units (vh/vw)
 
 Viewport units allow the author to specify sizes in relation to the viewport size. e.g. If you want a box to be sized such
 that it fills half the viewport height you'd specify height: 50vh;
@@ -75,7 +75,7 @@ How does each browser treat the URL bar with regard to the URL bar?
   + *Firefox* - Uses the largest possible viewable area (i.e. top controls hidden).
   + *IE* - Top controls don't hide so it uses the static viewable area.
 
-### window.innerHeight and window.innerWidth
+#### window.innerHeight and window.innerWidth
 
 The innerWidth and innerHeight properties of the window object specify the size of the browser window, not including any
 browser chrome (the UI concept, not the browser) like window borders and title bars. This *does* include scrollbars on
