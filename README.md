@@ -3,6 +3,8 @@ The mobile browser URL bar is such a pain! It interacts with the page in a diffe
 This page hopes to explain the nuances in how the URL bar affects the web page, document the differences
 between the browsers, and explain some proposed changes to how Chrome behaves.
 
+I've also provided a demo page and custom Chrome build to demonstrate the proposal.
+
 Note: These URL bar issues are inherent only to mobile platforms so all the above discussion implicitly
 applies only to the mobile versions of each browser.
 
