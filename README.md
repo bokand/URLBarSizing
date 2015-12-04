@@ -63,7 +63,7 @@ This is the one bit of good news in this story. However, resizing elements on th
 the sizes recalculated?
 
   + *Chrome* - At touchend (i.e. when the scroll ends).
-  + *Chrome* - At touchend (i.e. when the scroll ends).
+  + *Safari* - At touchend (i.e. when the scroll ends).
   + *Firefox* - When top controls hit their extent (i.e. are maximally shown/hidden).
   + *IE* - N/A
   
