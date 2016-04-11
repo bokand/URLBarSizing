@@ -106,8 +106,8 @@ changes the scroll direction. It's painful for developers because that's not how
 work. For compatibilities sake, lets make the ICB sized statically to the *smallest possible viewable area*.
 2. Make vh units relative to a static containing block. This means an author's 'vh' sized fonts wont change size each
 time the user scrolls in a new direction. It might be conceptually nice to make this relative to the proposed-static
-ICB (i.e. the smallest possible viewable area) but Safari already uses the opposite. Web authors' lives are difficult
-enought; in the name of compatibility, I propose we do the same thing as Safari and make vh units relative to the
+ICB (i.e. the smallest possible viewable area) but both Safari and Firefox already use the opposite. Web authors' lives are difficult
+enought; in the name of compatibility, I propose we do the same thing as Safari and Firefox, and make vh units relative to the
 *largest possible viewable area*.
 
 Some notes:
