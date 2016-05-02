@@ -25,7 +25,8 @@ So in terms of the URL bar hiding/showing, when is a resize event fired?
   fully hidden and a resize event will be dispatched.
   + *Safari* - When the controls reach their extent. That is, as soon as the controls are fully shown or fully
   hidden, a resize event will be dispatched even while the finger is down.
-  + *Firefox* - Firefox does not send a resize event at all in response to the URL bar.
+  + *Firefox* - When the user lifts their finger (final touchend). The URL bar will snap to either fully showing or
+  fully hidden and a resize event will be dispatched.
   + *IE* - The URL bar doesn't move, simple enough.
 
 #### Initial Containing Block size
@@ -43,8 +44,9 @@ So, how does the URL bar affect the ICB in each browser?
   event is fired, when the user lifts their finger.
   + *Safari* - Uses a static ICB that doesn't change in response to the URL bar. The size used is the smallest possible,
   i.e. the viewable area when the URL bar is fully shown.
-  + *Firefox* - Uses a static ICB that doesn't change in response to the URL bar. The size used is the largest possible,
-  i.e. the viewable area when the URL bar is fully hidden.
+  + *Firefox* - Firefox uses the viewable area that doesn't include the url bar, if it's showing, to size the ICB.
+  This means that the ICB is made smaller when the URL bar is shown. It gets resized at the same time as the resize
+  event is fired, when the user lifts their finger.
   + *IE* - Since the URL bar doesn't hide, it uses a static ICB which is the size of the viewable area.
   
 #### position:fixed size
@@ -56,7 +58,7 @@ How do position:fixed elements get precentage-based sizes?
 
   + *Chrome* - Based on the viewable area not including top controls.
   + *Safari* - Based on the viewable area not including top controls.
-  + *Firefox* - Based on the viewable area not including top controls.
+  + *Firefox* - Same as the ICB area (smaller when top controls are visible; resizes when the resize event is fired).
   + *IE* - Based on the viewable area not including top controls.
 
 This is the one bit of good news in this story. However, resizing elements on the page at 60fps is a bad idea, so when are
@@ -64,7 +66,7 @@ the sizes recalculated?
 
   + *Chrome* - At touchend (i.e. when the scroll ends).
   + *Safari* - At touchend (i.e. when the scroll ends).
-  + *Firefox* - When top controls hit their extent (i.e. are maximally shown/hidden).
+  + *Firefox* - When the user lifts their finger, same time as resize event is fired.
   + *IE* - N/A
   
 #### Viewport-units (vh/vw)
@@ -72,12 +74,13 @@ the sizes recalculated?
 Viewport units allow the author to specify sizes in relation to the viewport size. e.g. If you want a box to be sized such
 that it fills half the viewport height you'd specify height: 50vh;
 
-How does each browser treat the URL bar with regard to the URL bar?
+How does each browser treat the viewport units with regard to the URL bar?
 
   + *Chrome* - Uses the ICB to mean "viewport". This means that sizes based on vh units will change as top controls are
   shown/hidden.
   + *Safari* - Uses the largest possible viewable area (i.e. top controls hidden).
-  + *Firefox* - Uses the largest possible viewable area (i.e. top controls hidden).
+  + *Firefox* - Viewport units are based on the ICB area (smaller when top controls are visible; resizes with the
+  resize event).
   + *IE* - Top controls don't hide so it uses the static viewable area.
 
 #### window.innerHeight and window.innerWidth
@@ -92,8 +95,7 @@ How does each browser treat the URL bar with regard to innerHeight?
   hiding the URL bar increases the size of innerHeight. Unlike the resize event and ICB resize, the innerHeight is
   updated in real-time as the URL bar is partially shown/hidden.
   + *Safari* - The same as Chrome.
-  + *Firefox* - Similarly to the ICB, the window.innerHeight property isn't affected by the URL bar. The size used is the
-  largest possible viewable area (i.e. with the URL bar hidden).
+  + *Firefox* - Similarly to the ICB, the window.innerHeight property is resized when the user lifts their finger.
   + *IE* - Since the URL bar doesn't hide window.innerHeight doesn't change. It does not include the top controls while
   outerWidth does.
 
