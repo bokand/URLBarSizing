@@ -3,8 +3,8 @@ The mobile browser URL bar is such a pain! It interacts with the page in a diffe
 This page hopes to explain the nuances of how the URL bar affects the web page, document the differences
 between the browsers, and explain some proposed changes to Chrome to improve the current situation.
 
-I've also provided a [demo page](http://bokand.github.io/demo/urlbarsize.html) and to demonstrate the
-proposal. Enable chrome://flags/#enable-experimental-web-platform-features in Chrome 54/55 to see the difference.
+I've also provided a [demo page](http://bokand.github.io/demo/urlbarsize.html) to demonstrate the
+proposal. Try Chrome 56 (currently [Chrome Dev channel](https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en) to see the difference.
 
 Note: These URL bar issues are inherent only to mobile platforms so all the above discussion implicitly
 applies only to the mobile versions of each browser.
@@ -99,7 +99,7 @@ How does each browser treat the URL bar with regard to innerHeight?
   + *IE* - Since the URL bar doesn't hide window.innerHeight doesn't change. It does not include the top controls while
   outerWidth does.
 
-## Proposed Changes to Chrome
+## Changes in Chrome 56
 
 Clearly this is an interop disaster. I propose we make some small changes to Chrome to help the situation:
 
@@ -129,9 +129,10 @@ documentElement.clientHeight.
 
 ## Demo
 
-You can try out the proposed changes in a custom [build of Chromium](https://github.com/bokand/URLBarSizing/blob/master/ChromePublic.apk)
-provided in this repo. I've provided a [test page](http://bokand.github.io/demo/urlbarsize.html) that attempts to demonstrate
-all the points talked about here. The four bars on the right of the page are all possible combinations of 99%, 99vh,
+I've provided a [test page](http://bokand.github.io/demo/urlbarsize.html) that attempts to demonstrate
+all the points talked about here. Try Chrome 56 (currently 
+[Chrome Dev channel](https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en) to see the changed behavior.
+The four bars on the right of the page are all possible combinations of 99%, 99vh,
 position:fixed and position:absolute provided on a scrollable page. Hiding the URL bar shows how it affects each. Resize events
 are printed down the page.
 
