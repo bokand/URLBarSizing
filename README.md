@@ -127,6 +127,10 @@ root element to window.innerHeight in the resize handler.
 In general, the fixed-position viewport size can be read from window.innerHeight and the ICB size can be read from
 documentElement.clientHeight.
 
+### Known issues
+
+ - Scrollable "overlays" can appear chopped-off at the bottom. This can occur when the page shows a fullscreen overlay while the URL bar is hidden. A common patter is to set `display:none` on the content while the overlay is up. This isn't seen in Safari since it's more aggressive about showing the URL bar. The solution is to make the overlay `position: fixed; height: 100%`. See this [demo page](http://bokand.github.io/overlay-bug.html) displaying the issue and [this page](http://bokand.github.io/overlay-bug.html) showing the solution.
+
 ## Demo
 
 I've provided a [test page](http://bokand.github.io/demo/urlbarsize.html) that attempts to demonstrate
