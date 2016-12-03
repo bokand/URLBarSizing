@@ -11,6 +11,27 @@ applies only to the mobile versions of each browser.
 
 Caveat: I have not had the chance to try out Edge browser on mobile so it's not included below.
 
+## Update and Summary
+
+This change is currently on track to ship to stable in Chrome M56. I've preserved the rest of this explainer for reference but here's the distilled details of what developers should know:
+
+  * The initial containing block (ICB) is the root containing block for the page. When you give the `<html>` element `width: 100%; height: 100%`, its height is calculated from the ICB. Prior to this change, when the user hides the URL bar, Chrome would resize the ICB to fit the new visible area. With this change, the ICB will not change height in response to the URL bar. It will remain fixed to the size it would be when the URL bar is showing.
+  * `vh` units are used to size elements on the page with respect to the "viewport" height. `100vh` means use 100% of the viewport height. Prior to this change, Chrome would take "viewport" to mean ICB, which also meant these elements would get resized if the URL bar was hidden or shown. With this change, `100vh` will remain fixed to the height it would have been when the URL bar was hidden. This is different from ICB height to match Safari's behavior.
+  * `position: fixed` elements will continue to get their height from the dynamic visual viewport. That is, hiding/showing the URL bar will resize `position: fixed` elements with percentage height.
+  
+That is, there are three viewports used for sizing elements:
+
+The "vh viewport" is used to size `vh` units. It doesn't change height in response to the URL bar and behaves as if the URL bar is always hidden.
+
+The "visual viewport" is used as the root container for `position: fixed` elements. It is resized in response to the URL bar. 
+
+The "initial containing block" is used as the root container for all elements on the page other than `positoin: fixed`. It doesn't change height in response to the URL bar and behaves as if the URL bar is always showing.
+
+
+### Known issues
+
+ - Scrollable "overlays" can appear chopped-off at the bottom. This can occur when the page shows a fullscreen overlay while the URL bar is hidden. A common patter is to set `display:none` on the content while the overlay is up. This isn't seen in Safari since it's more aggressive about showing the URL bar. See this [demo page](http://bokand.github.io/overlay-bug.html) displaying the issue. [The solution](http://bokand.github.io/overlay-bug-fixed.html) is to make the overlay `position: fixed`.
+
 ## Differences between browsers
 
 #### Resize Event
@@ -126,10 +147,6 @@ root element to window.innerHeight in the resize handler.
 
 In general, the fixed-position viewport size can be read from window.innerHeight and the ICB size can be read from
 documentElement.clientHeight.
-
-### Known issues
-
- - Scrollable "overlays" can appear chopped-off at the bottom. This can occur when the page shows a fullscreen overlay while the URL bar is hidden. A common patter is to set `display:none` on the content while the overlay is up. This isn't seen in Safari since it's more aggressive about showing the URL bar. See this [demo page](http://bokand.github.io/overlay-bug.html) displaying the issue. [The solution](http://bokand.github.io/overlay-bug-fixed.html) is to make the overlay `position: fixed`.
 
 ## Demo
 
