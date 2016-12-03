@@ -129,7 +129,7 @@ documentElement.clientHeight.
 
 ### Known issues
 
- - Scrollable "overlays" can appear chopped-off at the bottom. This can occur when the page shows a fullscreen overlay while the URL bar is hidden. A common patter is to set `display:none` on the content while the overlay is up. This isn't seen in Safari since it's more aggressive about showing the URL bar. See this [demo page](http://bokand.github.io/overlay-bug.html) displaying the issue.
+ - Scrollable "overlays" can appear chopped-off at the bottom. This can occur when the page shows a fullscreen overlay while the URL bar is hidden. A common patter is to set `display:none` on the content while the overlay is up. This isn't seen in Safari since it's more aggressive about showing the URL bar. See this [demo page](http://bokand.github.io/overlay-bug.html) displaying the issue. [The solution](http://bokand.github.io/overlay-bug-fixed.html) is to make the overlay `position: fixed`.
 
 ## Demo
 
