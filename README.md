@@ -129,17 +129,14 @@ changes the scroll direction. It's painful for developers because that's not how
 work. For compatibilities sake, lets make the ICB sized statically to the *smallest possible viewable area*.
 2. Make vh units relative to a static containing block. This means an author's 'vh' sized fonts wont change size each
 time the user scrolls in a new direction. It might be conceptually nice to make this relative to the proposed-static
-ICB (i.e. the smallest possible viewable area) but both Safari and Firefox already use the opposite. Web authors' lives are difficult
-enought; in the name of compatibility, I propose we do the same thing as Safari and Firefox, and make vh units relative to the
-*largest possible viewable area*.
+ICB (i.e. the smallest possible viewable area) but both Safari and Firefox already use the opposite. Web authors' lives are difficult enought; in the name of compatibility, I propose we do the same thing as Safari and Firefox, and make vh units relative to the *largest possible viewable area*.
 
 Some notes:
 
-\#1 means that, when the top controls are showing, percentage-based heights will differ on elements based on whether they
-are position:fixed or not. position:fixed elements with percentage based heights will resize when the top controls are hidden
-or shown.
+\#1 means that, when the top controls are hidden, percentage-based heights will differ on elements based on whether they
+are position:fixed or not. position:fixed elements with percentage based heights will resize when the top controls are hidden or shown.
 
-\#2 means that vh units will not resize as a result of top controls, regardless of what their position: property is.
+\#2 doesn't apply to vh units set on a `position: fixed` element. They'll still resize in response to the URL bar.
 
 It will be a little more work to make non-fixed elements fill the viewport after scrolling. I believe in most cases you'd want
 this for position:fixed elements anyway. In the cases that remain, we can get back to todays behavior by explicitly sizing the
