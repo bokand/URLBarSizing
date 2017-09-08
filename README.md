@@ -1,19 +1,19 @@
 # URLBarSizing
 The mobile browser URL bar is such a pain! It interacts with the page in a different way in every browser.
 This page hopes to explain the nuances of how the URL bar affects the web page, document the differences
-between the browsers, and explain some proposed changes to Chrome to improve the current situation.
+between the browsers, and explain some ~~proposed~~ recent changes to Chrome to improve the current situation.
 
 I've also provided a [demo page](http://bokand.github.io/demo/urlbarsize.html) to demonstrate the
-proposal. Try Chrome 56 (currently [Chrome Dev channel](https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en) to see the difference.
+issues. This page can be used to compare the hehavior between different browsers.
 
 Note: These URL bar issues are inherent only to mobile platforms so all the above discussion implicitly
 applies only to the mobile versions of each browser.
 
-Caveat: I have not had the chance to try out Edge browser on mobile so it's not included below.
+Caveat: ~~I have not had the chance to try out Edge browser on mobile so it's not included below.~~ Edge does not have a movable URL bar.
 
 ## Update and Summary
 
-This change is currently on track to ship to stable in Chrome M56. I've preserved the rest of this explainer for reference but here's the distilled details of what developers should know:
+This change shipped in Chrome M56. I've preserved the rest of this explainer for reference but here's the distilled details of what developers should know:
 
   * The initial containing block (ICB) is the root containing block for the page. When you give the `<html>` element `width: 100%; height: 100%`, its height is calculated from the ICB. Prior to this change, when the user hides the URL bar, Chrome would resize the ICB to fit the new visible area. With this change, the ICB will not change height in response to the URL bar. It will remain fixed to the size it would be when the URL bar is showing.
   * `vh` units are used to size elements on the page with respect to the "viewport" height. `100vh` means use 100% of the viewport height. Prior to this change, Chrome would take "viewport" to mean ICB, which also meant these elements would get resized if the URL bar was hidden or shown. With this change, `100vh` will remain fixed to the height it would have been when the URL bar was hidden. This is different from ICB height to match Safari's behavior.
@@ -60,9 +60,10 @@ ICB has the same dimensions as the *viewport*. However, this is a little vague a
 
 So, how does the URL bar affect the ICB in each browser?
 
-  + *Chrome* - Chrome uses the viewable area that doesn't include the url bar, if it's showing, to size the ICB.
+  + *Chrome* - ~~Chrome uses the viewable area that doesn't include the url bar, if it's showing, to size the ICB.
   This means that the ICB is made smaller when the URL bar is shown. It gets resized at the same time as the resize
-  event is fired, when the user lifts their finger.
+  event is fired, when the user lifts their finger.~~ As of M56, Chrome uses a static ICB that doesn't change in
+  response to the URL bar. The size used is the smallest possible,  i.e. the viewable area when the URL bar is fully shown.
   + *Safari* - Uses a static ICB that doesn't change in response to the URL bar. The size used is the smallest possible,
   i.e. the viewable area when the URL bar is fully shown.
   + *Firefox* - Firefox uses the viewable area that doesn't include the url bar, if it's showing, to size the ICB.
@@ -97,8 +98,8 @@ that it fills half the viewport height you'd specify height: 50vh;
 
 How does each browser treat the viewport units with regard to the URL bar?
 
-  + *Chrome* - Uses the ICB to mean "viewport". This means that sizes based on vh units will change as top controls are
-  shown/hidden.
+  + *Chrome* - ~~Uses the ICB to mean "viewport". This means that sizes based on vh units will change as top controls are
+  shown/hidden.~~ As of M56, uses the largest possible viewable area (i.e. top controls hidden).
   + *Safari* - Uses the largest possible viewable area (i.e. top controls hidden).
   + *Firefox* - Viewport units are based on the ICB area (smaller when top controls are visible; resizes with the
   resize event).
