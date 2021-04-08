@@ -4,7 +4,7 @@ This page hopes to explain the nuances of how the URL bar affects the web page, 
 between the browsers, and explain some ~~proposed~~ recent changes to Chrome to improve the current situation.
 
 I've also provided a [demo page](http://bokand.github.io/demo/urlbarsize.html) to demonstrate the
-issues. This page can be used to compare the hehavior between different browsers.
+issues. This page can be used to compare the behavior between different browsers.
 
 Note: These URL bar issues are inherent only to mobile platforms so all the above discussion implicitly
 applies only to the mobile versions of each browser.
